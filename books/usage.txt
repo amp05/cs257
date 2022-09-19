@@ -1,5 +1,7 @@
 NAME
-     Books.py – search titles, authors and books from small dataset
+     Books.py – search titles, authors and books from small dataset (phase 1)
+     Aldo Polanco
+     Yiming Xia
 
 SYNOPSIS
      python3 books.py title [-t | -y | -h] string
