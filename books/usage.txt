@@ -1,0 +1,34 @@
+NAME
+     Books.py – search titles, authors and books from small dataset
+
+SYNOPSIS
+     python3 books.py title [-t | -y | -h] string
+     python3 books.py author [-h] string
+     python3 books.py year [-h] year1 year2
+
+DESCRIPTION
+
+For title:
+	Given a search string print a list of books whose titles contain it (case-insensitive). 
+
+For author:
+	Given a search string print a list of authors whose names contain it (case-insensitive). Printed alphabetically by surname. 
+
+For year:
+	Given two years, print a list of books whose release year is between the range year1-year2 (inclusive)
+	
+
+OPTIONS
+
+General:
+	-h, --help	Prints usage statement
+
+For title:
+	-t, --title	Sorts the resulting books by title alphabetically. Default.
+	-y, --year 	Sorts the resulting books by release year chronologically.
+
+
+
+
+
+
