@@ -12,7 +12,7 @@ For title:
 	Given a search string print a list of books whose titles contain it (case-insensitive). 
 
 For author:
-	Given a search string print a list of authors whose names contain it (case-insensitive). Printed alphabetically by surname. 
+	Given a search string print a list of books by authors whose names contain the search string (case-insensitive). Printed alphabetically by surname. 
 
 For year:
 	Given two years, print a list of books whose release year is between the range year1-year2 (inclusive)
