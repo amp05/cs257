@@ -79,20 +79,57 @@ class BooksDataSourceTester(unittest.TestCase):
         books = tiny_data_source.books_between_years(1830, None)
         self.assertTrue(len(books) == 2)
 
+    def test_books_search_sort_by_title(self):
+        books1_data_source = BooksDataSource('books1.csv')
+        books = books1_data_source.books('love', 'title')
+        self.assertTrue(len(books) == 2)
+        self.assertTrue(books[0].title == 'Beloved')
+        self.assertTrue(books[1].title == 'Love in the Time of Cholera')
 
+    def test_books_search_sort_by_year(self):
+        books1_data_source = BooksDataSource('books1.csv')
+        books = books1_data_source.books('love', 'year')
+        self.assertTrue(len(books) == 2)
+        self.assertTrue(books[0].title == 'Love in the Time of Cholera')
+        self.assertTrue(books[1].title == 'Beloved')
 
+    def test_books_search_sort_by_title_tie(self):
+        tieBooks_data_source = BooksDataSource('tieBooks1.csv')
+        books = tieBooks_data_source.books('love', 'title')
+        self.assertTrue(len(books) == 3)
+        self.assertTrue(books[0].authors == 'Aldo Polanco')
+        self.assertTrue(books[1].authors == 'Jeff Ondich')
+        self.assertTrue(books[2].authors == 'Michael Xia')
+
+    def test_books_search_sort_by_year_tie(self):
+        tieBooks_data_source = BooksDataSource('tieBooks1.csv')
+        books = tieBooks_data_source.books('love', 'year')
+        self.assertTrue(len(books) == 3)
+        self.assertTrue(books[0].authors == 'Jeff Ondich')
+        self.assertTrue(books[1].authors == 'Aldo Polanco')
+        self.assertTrue(books[2].authors == 'Michael Xia')
+
+    def test_books_search_authors_tie(self):
+        books1_data_source = BooksDataSource('books1.csv')
+        authors = books1_data_source.authors('Brontë')
+        self.assertTrue(len(authors) == 3)
+        self.assertTrue(authors[0].given_name == 'Ann')
+        self.assertTrue(authors[1].given_name == 'Charlotte')
+        self.assertTrue(authors[2].given_name == 'Emily')
+
+    def test_books_search_authors(self):
+        books1_data_source = BooksDataSource('books1.csv')
+        authors = books1_data_source.authors('To')
+        self.assertTrue(len(authors) == 2)
+        self.assertTrue(authors[0].surname == 'Morrison')
+        self.assertTrue(authors[1].surname == 'Orange')
     
-    
-    
-
-
-
-
-
-
-
-        
-
+    def test_books_search_between_years(self):
+        books1_data_source = BooksDataSource('books1.csv')
+        authors = books1_data_source.books_between_years('1930', '1980')
+        self.assertTrue(len(authors) == 2)
+        self.assertTrue(authors[0].surname == 'Morrison')
+        self.assertTrue(authors[1].surname == 'Orange')
 
 
 
