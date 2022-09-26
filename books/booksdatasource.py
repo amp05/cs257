@@ -63,7 +63,7 @@ class BooksDataSource:
                 book = Book(line[0], int(line[1]), [])
                 if book not in self.bks:
                     self.bks.append(book)
-                for names in line[2:]:
+                for names in line[2].split(" and "):
                     names = names.split(" ")
                     givenname = names[0]
                     surname = " ".join(names[1:-1])
