@@ -30,7 +30,7 @@ class Book:
         ''' Note that the self.authors instance variable is a list of
             references to Author objects. '''
         self.title = title
-        self.publication_year = publication_year
+        self.publication_year = int(publication_year)
         self.authors = authors
 
     def __eq__(self, other):
@@ -57,26 +57,25 @@ class BooksDataSource:
         '''
         self.bks = []
         self.auths = []
-        with open(books_csv_file_name) as source:
-            for line in source.readlines():
-                splitline = line.split(",")
-                book = Book(splitline[0], int(splitline[1]))
+        with open(books_csv_file_name) as sourcefile:
+            source = csv.reader(sourcefile)
+            for line in source:
+                book = Book(line[0], int(line[1]), [])
                 if book not in self.bks:
                     self.bks.append(book)
-                for author in splitline[2:]:
-                    author = author.split(" ")
-                    givenname = author[0]
-                    surname = " ".join(author[1:-1])
-                    years = author[-1].strip("()\n").split("-")
+                for names in line[2:]:
+                    names = names.split(" ")
+                    givenname = names[0]
+                    surname = " ".join(names[1:-1])
+                    years = names[-1].strip("()\n").split("-")
                     birthyear = int(years[0])
                     deathyear = int(years[1]) if years[1] != "" else None 
-                    author = Author(givenname, surname, birthyear, deathyear, [book,])
+                    author = Author(surname, givenname, birthyear, deathyear, [book,])
+                    book.authors.append(author)
                     if author not in self.auths:
                         self.auths.append(author)
-                        book.authors.append(author)
-                    elif author in self.author:
+                    elif author in self.auths:
                         author.books.append(book)
-                        book.authors.append(author)
 
     def authors(self, search_text=None):
         ''' Returns a list of all the Author objects in this data source whose names contain
@@ -89,7 +88,9 @@ class BooksDataSource:
             for author in self.auths:
                 if search_text.lower() in (author.given_name + " " + author.surname).lower():
                     toReturn.append(author)
-            return sorted(toReturn, key=lambda author: (author.surname, author.given_name))
+            help = sorted(toReturn, key=lambda author: (author.surname, author.given_name))
+            return help
+
         else:
             return sorted(self.auths, key=lambda author: (author.surname, author.given_name))
 
@@ -127,8 +128,8 @@ class BooksDataSource:
             should be included.
         '''
         toReturn = []
-        start = 0 if start_year == None else start_year
-        end = 99999 if end_year == None else end_year
+        start = 0 if start_year == None else int(start_year)
+        end = 99999 if end_year == None else int(end_year)
         for book in self.bks:
             if book.publication_year >= start and book.publication_year <= end:
                 toReturn.append(book)
