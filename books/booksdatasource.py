@@ -8,6 +8,7 @@
 
 import csv
 from re import search
+from tracemalloc import start
 
 class Author:
     def __init__(self, surname='', given_name='', birth_year=None, death_year=None, books=[]):
@@ -22,7 +23,7 @@ class Author:
         return self.surname == other.surname and self.given_name == other.given_name
     
     def __str__(self):
-        return self.given_name + " " + self.surname + " (" + str(self.birth_year) + "-" + str(self.death_year) + ")"
+        return self.given_name + " " + self.surname + " (" + str(self.birth_year) + "-" + (str(self.death_year) if self.death_year != None else "") + ")"
 
 class Book:
     def __init__(self, title='', publication_year=None, authors=[]):
@@ -54,24 +55,24 @@ class BooksDataSource:
             suitable instance variables for the BooksDataSource object containing
             a collection of Author objects and a collection of Book objects.
         '''
-        self.books = []
-        self.authors = []
+        self.bks = []
+        self.auths = []
         with open(books_csv_file_name) as source:
             for line in source.readlines():
                 splitline = line.split(",")
                 book = Book(splitline[0], int(splitline[1]))
-                if book not in self.books:
-                    self.books.append(book)
+                if book not in self.bks:
+                    self.bks.append(book)
                 for author in splitline[2:]:
                     author = author.split(" ")
                     givenname = author[0]
-                    surname = author[1:-1]
-                    years = author[-1].strip("()").split("-")
+                    surname = " ".join(author[1:-1])
+                    years = author[-1].strip("()\n").split("-")
                     birthyear = int(years[0])
                     deathyear = int(years[1]) if years[1] != "" else None 
                     author = Author(givenname, surname, birthyear, deathyear, [book,])
-                    if author not in self.authors:
-                        self.authors.append(author)
+                    if author not in self.auths:
+                        self.auths.append(author)
                         book.authors.append(author)
                     elif author in self.author:
                         author.books.append(book)
@@ -85,12 +86,12 @@ class BooksDataSource:
         '''
         toReturn = []
         if search_text != None:
-            for author in self.authors:
+            for author in self.auths:
                 if search_text.lower() in (author.given_name + " " + author.surname).lower():
                     toReturn.append(author)
             return sorted(toReturn, key=lambda author: (author.surname, author.given_name))
         else:
-            return sorted(self.authors, key=lambda author: (author.surname, author.given_name))
+            return sorted(self.auths, key=lambda author: (author.surname, author.given_name))
 
     def books(self, search_text=None, sort_by='title'):
         ''' Returns a list of all the Book objects in this data source whose
@@ -104,11 +105,11 @@ class BooksDataSource:
         '''
         toReturn = []
         if search_text != None:
-            for book in self.books:
+            for book in self.bks:
                 if search_text.lower() in book.title.lower():
                     toReturn.append(book)
         else:
-            toReturn = self.books
+            toReturn = self.bks
         
         if sort_by == "year":
             return sorted(toReturn, key=lambda book: (book.publication_year, book.title))
@@ -125,4 +126,10 @@ class BooksDataSource:
             during start_year should be included. If both are None, then all books
             should be included.
         '''
-        return []
+        toReturn = []
+        start = 0 if start_year == None else start_year
+        end = 99999 if end_year == None else end_year
+        for book in self.bks:
+            if book.publication_year >= start and book.publication_year <= end:
+                toReturn.append(book)
+        return sorted(toReturn, key=lambda book: (book.publication_year, book.title))
