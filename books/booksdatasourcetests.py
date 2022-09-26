@@ -41,13 +41,13 @@ class BooksDataSourceTester(unittest.TestCase):
 
     def test_no_books(self):
         tiny_data_source = BooksDataSource('tinybooks.csv')
-        authors = tiny_data_source.books("NO BOOK HAS THIS NAME")
-        self.assertTrue(len(authors) == 0)
+        books = tiny_data_source.books("NO BOOK HAS THIS NAME")
+        self.assertTrue(len(books) == 0)
 
     def test_one_book(self):
         tiny_data_source = BooksDataSource('tinybooks.csv')
-        authors = tiny_data_source.books("Emma")
-        self.assertTrue(len(authors) == 1)
+        books = tiny_data_source.books("Emma")
+        self.assertTrue(len(books) == 1)
 
     def test_one_author(self):
         tiny_data_source = BooksDataSource('tinybooks.csv')
