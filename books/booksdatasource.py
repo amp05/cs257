@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+#CS257 BOOOOOKS project
+#written by Aldo Polanco and Michael Xia
+
 '''
     booksdatasource.py
     Jeff Ondich, 21 September 2022
