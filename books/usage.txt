@@ -4,9 +4,9 @@ NAME
      Yiming Xia
 
 SYNOPSIS
-     python3 books.py title [-t | -y | -h] string
-     python3 books.py author [-h] string
-     python3 books.py year [-h] year1 year2
+     python3 books.py title [-t | -y | -h] --searchWord string
+     python3 books.py author [-h] --serachWord string
+     python3 books.py year [-h] --searchWord year1 --searchWord2 year2
 
 DESCRIPTION
 
