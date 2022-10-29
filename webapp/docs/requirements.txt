@@ -1,0 +1,20 @@
+Alex Widman
+Aldo Polanco
+James Berger
+
+The Ultimate Survivor Search Tool
+10/29/22
+
+Description of Data:
+This database is built for fans of the American reality competition franchise Survivor. The data contains three CSV tables with data based on Survivor seasons, contestants, and tribes from seasons 1-42. The data was scraped from Wikipedia and Fandom into a Kaggle dataset by Justin Veiner and published with the following link: https://www.kaggle.com/datasets/justinveiner/survivor-cbs-dataset?select=season_table.csv
+
+Use Cases:
+STORY: A Survivor fan can look up a player, a tribe, or a season so they can see all their stats at once.
+IMPLEMENTATION: This would simply be a search box that would return the same fields that the data set has for each of the tables (tribe, player, season)
+STORY: A Survivor fan can see how age corresponds to the finished contestant placement so they can figure out at what age they should apply to be on the show for the best outcome.
+IMPLEMENTATION: One way of doing this would be to create a drop-down menu allowing the user to search by various factors (age, gender, and ethnicity tag (African American, Asian American, Latin American)). If the user inputs age, the webpage should display a graph with age on the X-axis and placement on the Y-axis.
+The type of graph would change depending on the type of data. For example, with categorical factors such as gender and ethnicity tags, placement means will be displayed with the X-axis being season and the Y-axis being placement, with 3 scatterplot lines, each representing a different ethnicity tag.
+STORY: Anyone can look up two people and it’ll display the degrees of separation between each contestant so they can see who was on which season with who, and how many degrees of separation each contestant has, and maybe compare different players’ abilities. 
+IMPLEMENTATION: Exact copy of this https://oracleofbacon.org/. Where you input two names and the database searches for the shortest path from one to the other.  
+STORY: Survivor Casting can look up the diversity breakdown on each season so they can better respond to campaigns to make Survivor more equitable, as fans see people of color having lower placements on average. 
+IMPLEMENTATION: We would show a given season’s statistics on race, including the average placement of people of color in the season. 
