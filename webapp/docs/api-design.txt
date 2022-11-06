@@ -1,0 +1,115 @@
+Aldo Polanco, James Berger, Alex Widman 11/7/22 CS257
+
+api design:
+
+REQUEST: /contestants
+
+GET parameters
+    name (Optional, default: ''”) -- return only contestants whose
+        first or last names contain search_text, case-insensitively
+
+    season_number (Optional, default: “”) -- return only contestants who
+        were in that numbered season
+    
+    age (Optional, default: infinity) -- return only authors who died
+        no later than end_year
+
+    placement (Optional, default: -infinity) -- return only contestants who placed
+        In that number placement
+
+    gender (Optional, default: “”, options: “M”, “F”, “N”) -- return only contestants with gender “M”     for male, “F” for female and “N” for non-binary
+
+    ethnicity (Optional, default: “”, options: “african_american”, “latin_american”, “asian_american”) -- return contestants that are of the selected ethnicity
+
+   hometown (Optional, default: ''”) -- return only contestants whose
+        hometowns contain search_text, case-insensitively
+ 
+  occupation (Optional, default: ''”) -- return only contestants whose
+        occupations contain search_text, case-insensitively
+
+
+RESPONSE: a JSON list of dictionaries, each of which represents one
+contestant, sorted alphabetically by name. Each dictionary in this
+list will have the following fields.
+
+   name -- (TEXT) the contestant’s full name
+   season_number -- (INTEGER) the season the contestant competed
+   age -- (INTEGER) contestant’s name when they competed
+   hometown – (TEXT) the contestant’s hometown
+   occupation – (TEXT) the contestant’s occupation
+   african_american – (BIT) 1 if the contestant is african american, 0 if not
+   latin_american – (BIT) 1 if the contestant is latin american, 0 if not
+   asian_american – (BIT) 1 if the contestant is asian american, 0 if not
+
+EXAMPLE:
+    /contestants?search_text=hatch
+
+       [{"name":"Richard Hatch", "season_number":1, "age":39, “hometown”:”Newport, RI”, “occupation”: “Corporate Trainer”, “african_american”:0, “latin_american”:0, “asian_american”:0},
+        {"name":"Richard Hatch", "season_number":8, "age":42, “hometown”:”Newport, RI”, “occupation”: “Corporate Trainer”, “african_american”:0, “latin_american”:0, “asian_american”:0}]
+
+(Richard Hatch was on season 1, and season 8, hence two entries)
+
+— — — — — — — — 
+
+REQUEST: /seasons
+
+GET parameters
+    season_number (Optional, default: ''”) -- returns the season whose season number is season_number
+
+    season_name (Optional, default: “”) -- return only the season whose season name is season_name
+    
+
+RESPONSE: a JSON list of dictionaries, each of which represents one
+season, sorted from least recent to most recent. Each dictionary in this
+list will have the following fields.
+
+   season_number – (INTEGER) the season’s number
+   season_name -- (TEXT) the season’s name
+   num_contestants -- (INTEGER) the number of contestants in the season
+
+EXAMPLE:
+    /seasons?season_number=2
+
+       [{"season_number":"2", "season_name":"Survivor: The Australian Outback", "num_contestants":16}]
+
+— — — — — — — — 
+
+REQUEST: /tribes
+
+GET parameters
+    tribe (Optional, default: ''”) -- return only tribes whose
+        names contain search_text, case-insensitively
+
+    season_number (Optional, default: “”) -- return only tribes who
+        were in that numbered season
+    
+    size (Optional, default: infinity) -- return only tribes whose number of members contain number in search_text
+
+
+    poc (Optional, default: “0”) -- return tribes with at least this number of contestants that are people of color in a tribe
+
+  merged (Optional, default: ''”, options: “0”, “1”) -- return only tribes who have merged before
+
+
+
+RESPONSE: a JSON list of dictionaries, each of which represents one
+contestant, sorted alphabetically by last name (and sorted alphabetically
+by first name when last names are equal). Each dictionary in this
+list will have the following fields.
+
+   season_number -- (INTEGER) the season the tribe competed
+   tribe_name -- (TEXT) the tribe’s name
+   size -- (INTEGER) the number of people in a tribe
+   poc  -- (INTEGER) the number of contestants of contestants of color in a tribe
+   merged – (BIT) whether the tribe is a merged tribe, 0 if not, 1 if yes
+
+
+
+EXAMPLE:
+    /tribes?season_number=2&merged=0
+
+       [{"season_number":"2", "tribe_names":”Kucha”, “size”:”8”, “pocs”:”2”, “merged”:”1”}, {"season_number":"2", "tribe_names":”Ogakor” “size”:”8”, “pocs”:”1”, “merged”:”1”}, {"season_number":"2", "tribe_names":”Barramundi”,  “size”:”10”, “pocs”:”2”, “merged”:”0”}
+
+
+— — — — — — — — 
+
