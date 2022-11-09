@@ -1,3 +1,3 @@
-database = 
-username = 
-password = 
+user = 'jondich'
+password = ''
+database = 'grading'
