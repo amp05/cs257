@@ -1,0 +1,42 @@
+/* CS257 Web Application
+James Berger, Aldo Polanco, Alex Widman */
+
+
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+
+/* Horizontal navigation */
+ul.horizontal-navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    align-content: center;
+}
+
+ul.horizontal-navbar li {
+    float: left;
+}
+
+ul.horizontal-navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.horizontal-navbar li a:hover {
+    background-color: #555;
+    color: white;
+}
