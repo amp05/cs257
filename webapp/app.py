@@ -2,6 +2,7 @@
     app.py
     Jeff Ondich, 25 April 2016
     Updated 8 November 2021
+    Aldo Polanco, Alex Widman, James Berger Updated 9 November 2022
 
     A small Flask application that provides a barelywebsite with an accompanying
     API (which is also tiny) to support that website.
@@ -18,7 +19,7 @@ def home():
     return flask.render_template('index.html')
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('A books-and-authors application, including API & DB')
+    parser = argparse.ArgumentParser('A Survivor contestant application, including API & DB')
     parser.add_argument('host', help='the host to run on')
     parser.add_argument('port', type=int, help='the port to listen on')
     arguments = parser.parse_args()
