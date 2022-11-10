@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: contestants; Type: TABLE; Schema: public; Owner: jamesberger
+-- Name: contestants; Type: TABLE; Schema: public; Owner: aldopolanco
 --
 
 CREATE TABLE public.contestants (
@@ -38,10 +38,10 @@ CREATE TABLE public.contestants (
 );
 
 
-ALTER TABLE public.contestants OWNER TO jamesberger;
+ALTER TABLE public.contestants OWNER TO aldopolanco;
 
 --
--- Name: season; Type: TABLE; Schema: public; Owner: jamesberger
+-- Name: season; Type: TABLE; Schema: public; Owner: aldopolanco
 --
 
 CREATE TABLE public.season (
@@ -51,10 +51,10 @@ CREATE TABLE public.season (
 );
 
 
-ALTER TABLE public.season OWNER TO jamesberger;
+ALTER TABLE public.season OWNER TO aldopolanco;
 
 --
--- Name: tribe; Type: TABLE; Schema: public; Owner: jamesberger
+-- Name: tribe; Type: TABLE; Schema: public; Owner: aldopolanco
 --
 
 CREATE TABLE public.tribe (
@@ -66,10 +66,10 @@ CREATE TABLE public.tribe (
 );
 
 
-ALTER TABLE public.tribe OWNER TO jamesberger;
+ALTER TABLE public.tribe OWNER TO aldopolanco;
 
 --
--- Data for Name: contestants; Type: TABLE DATA; Schema: public; Owner: jamesberger
+-- Data for Name: contestants; Type: TABLE DATA; Schema: public; Owner: aldopolanco
 --
 
 COPY public.contestants (contestant_name, age, hometown, occupation, season_number, finish, gender, african_american, asian_american, latin_american) FROM stdin;
@@ -844,7 +844,7 @@ Maryanne Oketch	24	Ajax,  ON	Seminary Student	42	1	F	1	0	0
 
 
 --
--- Data for Name: season; Type: TABLE DATA; Schema: public; Owner: jamesberger
+-- Data for Name: season; Type: TABLE DATA; Schema: public; Owner: aldopolanco
 --
 
 COPY public.season (season_number, season_name, num_contestant) FROM stdin;
@@ -894,7 +894,7 @@ COPY public.season (season_number, season_name, num_contestant) FROM stdin;
 
 
 --
--- Data for Name: tribe; Type: TABLE DATA; Schema: public; Owner: jamesberger
+-- Data for Name: tribe; Type: TABLE DATA; Schema: public; Owner: aldopolanco
 --
 
 COPY public.tribe (season_number, tribe_name, size, merged, poc) FROM stdin;

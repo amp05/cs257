@@ -44,7 +44,7 @@ function loadContestantsSelector() {
         for (let k = 0; k < contestants.length; k++) {
             let contestant = contestants[k];
             selectorBody += '<option value="' + contestant['id'] + '">'
-                                + contestant['contestant_name'] + ', ' + contestant['age'] + ', ' + contestant['season_number']
+                                + contestant['contestant_name'] + ', ' + contestant['age'] + ', from ' + contestant['hometown']
                                 + '</option>\n';
         }
 
