@@ -29,14 +29,14 @@ function getAPIBaseURL() {
 function loadContestantsSelector() {
     let url = getAPIBaseURL() + '/contestants/';
 
-    // Send the request to the books API /authors/ endpoint
+    // Send the request to the survivor API /contestants/ endpoint
     fetch(url, {method: 'get'})
 
     // When the results come back, transform them from a JSON string into
     // a Javascript object (in this case, a list of contestant dictionaries).
     .then((response) => response.json())
 
-    // Once you have your list of author dictionaries, use it to build
+    // Once you have your list of contestant dictionaries, use it to build
     // an HTML table displaying the contestant name, age, and season.
     .then(function(contestants) {
         // Add the <option> elements to the <select> element
