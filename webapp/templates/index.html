@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='webapp.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='webapp.js') }}" ></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <title>Ultimate Survivor Database</title>
+</head>
+
+<body>
+    <h1>Ultimate Survivor Database</h1>
+    <p>Maybe you're a fan of Survivor. Maybe you're trying to research past seasons for a Fantasy Survivor League. 
+        Or maybe you're just curious! Either way, use this database to explore the world of the CBS American TV Series</p>
+
+    <p>Contestants <select id="contestant_selector"></select></p>
+
+    <p><table id="contestants_table"></table></p>
+</body>
+</html>
