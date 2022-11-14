@@ -11,4 +11,4 @@ Features that are not working:
     - Hometown page
     - Graphs page
     - Odds of winning page
-    - Missing link page
+    - Missing link page (might change for funciton for final version)
