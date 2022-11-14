@@ -18,9 +18,10 @@ body {
 
 .column {
     float: left;
-    width: 50%;
+    width: 40%;
     font-weight: 800;
 }
+
 
 
 /* Horizontal navigation */
