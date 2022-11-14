@@ -8,7 +8,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
-    color: #ff004c;
+    color: #ff006a;
     
 }
 .header {
@@ -16,8 +16,23 @@ body {
     padding: 20px;
 }
 
-.column {
-    float: left;
+.column1 {
+    margin-top: 5%;
+    margin-left: 25%;
+    width: 40%;
+    font-weight: 800;
+}
+
+.column2 {
+    margin-left: 60%;
+    margin-top: -15%;
+    width: 40%;
+    font-weight: 800;
+}
+
+.column3 {
+    margin-left: 60%;
+    margin-top: -20%;
     width: 40%;
     font-weight: 800;
 }
@@ -53,3 +68,16 @@ ul.horizontal-navbar li a:hover {
     color: white;
 }
 
+.indexlist{
+
+    font-size: larger;
+    font-weight: 900;
+    margin-left: 15%;
+
+}
+
+h2 {
+
+    color: black;
+    font-size: medium;
+}
