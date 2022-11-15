@@ -1,0 +1,39 @@
+REQUEST: /contestants
+
+GET parameters
+    name (Optional, default: ''”) -- return only contestants whose
+        first or last names contain search_text, case-insensitively
+
+
+RESPONSE: a JSON list of dictionaries, each of which represents one
+contestant, sorted alphabetically by name. Each dictionary in this
+list will have the following fields.
+
+   name -- (TEXT) the contestant’s full name
+   season_number -- (INTEGER) the season the contestant competed
+   age -- (INTEGER) contestant’s name when they competed
+   hometown – (TEXT) the contestant’s hometown
+   occupation – (TEXT) the contestant’s occupation
+
+EXAMPLE:
+    /contestants?search_text=hatch
+
+       [{"name":"Richard Hatch", "season_number":1, "age":39, “hometown”:”Newport, RI”, “occupation”: “Corporate Trainer”},
+        {"name":"Richard Hatch", "season_number":8, "age":42, “hometown”:”Newport, RI”, “occupation”: “Corporate Trainer”}]
+
+--
+REQUEST: /connections
+
+GET parameters
+    source -- return 'degrees of separation' starting from this contestant
+    target -- return 'degrees of separation' ending with this contestant
+
+
+RESPONSE: a JSON list with contestant names. More data to be added in future version
+
+
+EXAMPLE:
+    /connections?source=Spencer%20Bledsoe&target=Eddie%20Fox
+
+       ["Spencer Bledsoe", "Tony Vlachos", "Malcolm Freberg", "Eddie Fox"]
+

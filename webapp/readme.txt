@@ -4,7 +4,7 @@ Fall 2022
 James Berger, Aldo Polanco, Alex Widman
 
 Features that are working:
-    - Simplified missing link page (trouble with the advanced features)
+    - Missing link page
     - Search for contestants page
 
 Features that are not working:

@@ -4,7 +4,7 @@
     Updated 8 November 2021
     Aldo Polanco, James Berger, Alex Widman 9 November 2022
 
-    Tiny Flask API to support the tiny books web application.
+    Tiny Flask API to support the tiny survivor web application.
 '''
 import sys
 import flask
@@ -21,6 +21,12 @@ def get_connection():
     return psycopg2.connect(database=config.database,
                             user=config.user,
                             password=config.password)
+
+
+@api.route('/help/', strict_slashes=False)
+def get_help():
+    with open("docs/api-help.txt") as f:
+        return f.readlines()
 
 
 @api.route('/contestants/', strict_slashes=False)
@@ -44,7 +50,6 @@ def get_contestants_matching():
         cursor = connection.cursor()
         cursor.execute(query)
         for row in cursor:
-            print(row[0])
             contestant = {'contestant_name':row[0],
                     'season_name':row[1],
                     'age':row[2],
