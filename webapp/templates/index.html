@@ -2,21 +2,42 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='webapp.css') }}" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
     <script type="text/javascript" src="{{ url_for('static', filename='webapp.js') }}" ></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <title>Ultimate Survivor Database</title>
 </head>
 
 <body>
-    <h1>Ultimate Survivor Database</h1>
-    <p>Maybe you're a fan of Survivor. Maybe you're trying to research past seasons for a Fantasy Survivor League. 
-        Or maybe you're just curious! Either way, use this database to explore the world of the CBS American TV Series</p>
+    <h2 class = "header"><a href = "index.html">The Ultimate Survivor Database</a></h2>
+    <div align ="center">
+        <h2>Maybe you're a fan of Survivor. Maybe you're trying to research past seasons for your Fantasy Survivor League. 
+            Or maybe you're just curious! Either way, use this database to explore the world of the CBS American TV Series</h2>
+
+    </div>
+        
+    
+    <ul class = "horizontal-navbar">
+            <li><a href= "hometown.html">Contestant's Hometowns</a></li>
+            <li><a href= "connections.html">The Missing Link</a></li>
+            <li><a href= "graphs.html">Graphs on Graphs</a></li>
+            <li><a href= "odds.html">Can You Survive?</a></li>
+        </ul>
+   
+    <div>
+        <ol class = "indexlist">
+            <li>Use the Hometown tool to view the hometowns of contestants from the show!</li>
+            <li>Use the Missing Link tool to see if there are any connections between any of the contestants!</li>
+            <li>Use the Graphs tool to see visuals on winners based on age, gender, or ethnicity!</li>
+            <li>Use the Can You Survive tool to see the probability of you winning survivor based on past winners!</li>
+        </ol>
+
+
+    </div>
 
     <p><button id="contestants_button"> Search Contestants</button>
-    <input type = "text" id = "contestant_search_text" />
-    </p>
-    <p><table id="contestants_table"></table></p>
-
+        <input type = "text" id = "contestant_search_text" />
+        </p>
+        <p><table id="contestants_table"></table></p>
 </body>
 </html>
