@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css" />
+    <script type="text/javascript" src="{{ url_for('static', filename='webapp.js') }}"></script>
     <title>Missing Link</title>
 </head>
 
 <body>
-    <h2 class = "header"><a href = "index.html">The Ultimate Survivor Database</a></h2>
+    <h2 class = "header"><a href = "">The Ultimate Survivor Database</a></h2>
     <ul class = "horizontal-navbar">
         <li><a href= "hometown.html">Contestant's Hometowns</a></li>
         <li><a href= "connections.html">The Missing Link</a></li>
@@ -28,10 +29,14 @@
    
         <div class = "column1">
             <p>Contestant 1</p>
-            <input></input>
+            <input type = 'text' id='source'></input>
             <p>Contestant 2</p>
-            <input></input>
+            <input type = 'text' id='target'></input>
+            <button id="find_link"> Find link!</button>
+            <ul id="path"></ul>
+
         </div>
+
     
 
 </body>
