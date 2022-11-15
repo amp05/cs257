@@ -10,9 +10,13 @@ window.onload = initialize;
 function initialize() {
     loadContestantsSelector();
 
-    let element = document.getElementById('contestant_selector');
+    var element = document.getElementById('contestant_selector');
     if (element) {
-        element.onchange = onAuthorsSelectionChanged;
+        //element.onchange = onAuthorsSelectionChanged;
+    }
+    var element = document.getElementById('find_link');
+    if (element) {
+        element.onclick = onFindLinkButton;
     }
 }
 
@@ -55,6 +59,40 @@ function loadContestantsSelector() {
     })
 
     // Log the error if anything went wrong during the fetch.
+    .catch(function(error) {
+        console.log(error);
+    });
+}
+
+function onFindLinkButton() {
+    var url = getAPIBaseURL() + '/connections/';
+    var element1 = document.getElementById('source');
+    var element2 = document.getElementById('target');
+    if (!element1 || !element2) {
+        return;
+    }
+
+    url += '?source=' + element1.value;
+    url += '&target=' + element2.value;
+
+    fetch(url, {method: 'get'})
+
+    .then((response) => response.json())
+
+    .then(function(path) {
+        var listBody = '';
+        for (var k = 0; k < path.length; k++) {
+            var contestant = path[k];
+            listBody += '<li>' + contestant
+                      + '</li>\n';
+        }
+
+        var pathElement = document.getElementById('path');
+        if (pathElement) {
+            pathElement.innerHTML = listBody;
+        }
+    })
+
     .catch(function(error) {
         console.log(error);
     });

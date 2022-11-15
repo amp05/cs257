@@ -18,6 +18,10 @@ app.register_blueprint(api.api, url_prefix='/api')
 def home():
     return flask.render_template('index.html')
 
+@app.route('/connections.html') 
+def connections():
+    return flask.render_template('connections.html')
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A Survivor contestant application, including API & DB')
     parser.add_argument('host', help='the host to run on')
