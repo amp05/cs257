@@ -1,0 +1,83 @@
+/* CS257 Web Application
+James Berger, Aldo Polanco, Alex Widman */
+
+
+body {
+
+    background-image: url("https://static.vecteezy.com/system/resources/previews/002/354/386/original/foggy-pine-forest-background-vector.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+    color: #ff0011;
+    
+}
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.column1 {
+    margin-top: 5%;
+    margin-left: 25%;
+    width: 40%;
+    font-weight: 800;
+}
+
+.column2 {
+    margin-left: 60%;
+    margin-top: -15%;
+    width: 40%;
+    font-weight: 800;
+}
+
+.column3 {
+    margin-left: 60%;
+    margin-top: -20%;
+    width: 40%;
+    font-weight: 800;
+}
+
+
+
+/* Horizontal navigation */
+ul.horizontal-navbar {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    width: 640px;
+    
+    
+}
+    
+ul.horizontal-navbar li {
+    float: left;
+}
+
+ul.horizontal-navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.horizontal-navbar li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.indexlist{
+
+    font-size: larger;
+    font-weight: 900;
+    margin-left: 15%;
+
+}
+
+h2 {
+
+    color: black;
+    font-size: medium;
+}
