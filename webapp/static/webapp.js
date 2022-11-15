@@ -8,11 +8,9 @@
 window.onload = initialize;
 
 function initialize() {
-    loadContestantsSelector();
-
-    let element = document.getElementById('contestant_selector');
+    var element = document.getElementById('contestants_button');
     if (element) {
-        element.onchange = onAuthorsSelectionChanged;
+        element.onclick = loadContestantsSelector;
     }
 }
 
@@ -28,6 +26,10 @@ function getAPIBaseURL() {
 
 function loadContestantsSelector() {
     let url = getAPIBaseURL() + '/contestants/';
+    var element = document.getElementById('contestant_search_text')
+    if (element) {
+        url += '?name=' + element.value;
+    }
 
     // Send the request to the survivor API /contestants/ endpoint
     fetch(url, {method: 'get'})
@@ -40,17 +42,21 @@ function loadContestantsSelector() {
     // an HTML table displaying the contestant name, age, and season.
     .then(function(contestants) {
         // Add the <option> elements to the <select> element
-        let selectorBody = '';
-        for (let k = 0; k < contestants.length; k++) {
+        var tableBody = '';
+        for (var k = 0; k < contestants.length; k++) {
             let contestant = contestants[k];
-            selectorBody += '<option value="' + contestant['id'] + '">'
-                                + contestant['contestant_name'] + ', ' + contestant['age'] + ', from ' + contestant['hometown']
-                                + '</option>\n';
+            tableBody += '<tr>'
+                            + '<td>' + contestant['contestant_name'] + '</td>'
+                            + '<td>' + contestant['age'] + '</td>'
+                            + '<td>' + contestant['hometown'] + '</td>'
+                            + '<td>' + contestant['occupation'] + '</td>'
+                            + '<td>' + contestant['season_name'] + '</td>'
+                            + '</tr>\n';
         }
 
-        let selector = document.getElementById('contestant_selector');
-        if (selector) {
-            selector.innerHTML = selectorBody;
+        let contestantTable = document.getElementById('contestants_table');
+        if (contestantTable) {
+            contestantTable.innerHTML = tableBody;
         }
     })
 
@@ -59,3 +65,6 @@ function loadContestantsSelector() {
         console.log(error);
     });
 }
+
+window.onload = initalize;
+

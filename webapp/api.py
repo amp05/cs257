@@ -22,39 +22,39 @@ def get_connection():
                             user=config.user,
                             password=config.password)
 
-@api.route('/contestants/') 
-def get_contestants():
-    ''' Returns a list of all the contestants in our database.
 
-        By default, the list is presented in alphabetical order
-        by name. 
+@api.route('/contestants/', strict_slashes=False)
+def get_contestants_matching():
+    '''Returns a list of all contestants whose names include search_text
+    
+    By default, the list is presented in alphabetical order
+    by name. 
 
-        Returns an empty list if there's any database failure.
+    Returns an empty list if there's any database failure.
     '''
+    name = flask.request.args.get('name', default ='')
+
     query = '''SELECT contestant_name, season_number, age, hometown, occupation
-               FROM contestants ORDER BY '''
+               FROM contestants 
+               ORDER BY contestant_name'''
 
-    sort_argument = flask.request.args.get('sort')
-    if sort_argument == 'season_number':
-        query += 'season_number, contestant_name'
-    else:
-        query += 'contestant_name'
-
-    contestant_list = []
+    matching_contestants = []
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query, tuple())
+        cursor.execute(query)
         for row in cursor:
+            print(row[0])
             contestant = {'contestant_name':row[0],
-                      'season_name':row[1],
-                      'age':row[2],
-                      'hometown':row[3],
-                      'occupation':row[4]}
-            contestant_list.append(contestant)
+                    'season_name':row[1],
+                    'age':row[2],
+                    'hometown':row[3],
+                    'occupation':row[4]}
+            if name.lower() in row[0].lower():
+                matching_contestants.append(contestant)
         cursor.close()
         connection.close()
     except Exception as e:
         print(e, file=sys.stderr)
 
-    return json.dumps(contestant_list)
+    return json.dumps(matching_contestants)
