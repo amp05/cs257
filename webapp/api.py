@@ -88,23 +88,40 @@ def find_missing_link():
     except Exception as e:
         print(e, file=sys.stderr)
 
-    
     contestant_al = {}
+    season_dict = {}
     for c1 in contestants:
+        if c1['season_number'] not in season_dict:
+            season_dict[c1['season_number']] = [c1['contestant_name']]
+        else:
+            season_dict[c1['season_number']].append(c1['contestant_name'])
         if c1['contestant_name'] not in contestant_al:
             contestant_al[c1['contestant_name']] = [c1['contestant_name']]
         for c2 in contestants:
             if c1['season_number'] == c2['season_number']:
                 contestant_al[c1['contestant_name']].append(c2['contestant_name'])
     path = find_link(contestant_al, source, target)
-    if len(path) < 1:
-        path = ["No path found"]
-    return json.dumps(path)
+    return json.dumps(parse_path(season_dict, path))
 
+def parse_path(season_dict, path):
+    if len(path) < 1:
+        return ["No link found"]
+    toReturn = []
+    toReturn.append(path[0] + ' played with ' + path[1] + ' in season ' + str(find_season(season_dict, path[0], path[1])))
+    if len(path) > 2:
+        for c in range(2, len(path[2:])+2):
+            toReturn.append(path[c-1] + ' played with ' + path[c] + ' in season ' + str(find_season(season_dict, path[c-1], path[c])))
+    print(toReturn)
+    return toReturn
+
+def find_season(season_dict, c1, c2):
+    for s in range(1, 42):
+        if c1 in season_dict[s] and c2 in season_dict[s]:
+            return s
+    return 0
 
 
 def find_link(graph, start, end):
-    # maintain a queue of paths
     # 1 degree of separation
     if end in graph[start]:
         return [start, end]
@@ -117,10 +134,14 @@ def find_link(graph, start, end):
             if n1 in graph[n2]:
                 return [start, n1, n2, end]
     for n1 in graph[start]:
-        for n2 in graph[end]:
-            for n3 in [n for n in graph[n1] if n in graph[n2]]:
-                return [start, n1, n3, n2, end]
-    #TODO: fix 5th degree connections
+        for n3 in graph[end]:
+            for n2 in [n for n in graph[n1] if n in graph[n3]]:
+                return [start, n1, n2, n3, end]
+    for n1 in graph[start]:
+        for n4 in graph[end]:
+            for n3 in graph[n4]:
+                for n2 in [n for n in graph[n1] if n in graph[n3]]:
+                    return [start, n1, n2, n3, n4, end]
     return []
 
 
