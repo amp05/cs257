@@ -11,6 +11,9 @@ import flask
 import json
 import config
 import psycopg2
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 api = flask.Blueprint('api', __name__)
 
@@ -119,4 +122,36 @@ def find_link(graph, start, end):
                 return [start, n1, n3, n2, end]
     #TODO: fix 5th degree connections
     return []
+
+
+
+@api.route('/graphs/') 
+def graphs():
+    query = '''SELECT contestants.age, contestants.finish
+               FROM contestants
+               ORDER BY contestants.age'''
+    source = flask.request.args.get('source')
+    target = flask.request.args.get('target')
+    contestants = []
+
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        for row in cursor:
+            contestant = {'contestant_age':row[0], 'contestant.placement':row[1]}
+            contestants.append(contestant)
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        print(e, file=sys.stderr)
+    
+    xpoints = np.array([1, 80])
+    ypoints = np.array([1, 20])
+
+    fig = plt.figure(figsize=(8,6))
+    plt.plot(contestants['age'],contestants['placement'],'.')
+    plt.xlabel('Age')
+    plt.ylabel('Placement')
+    plt.show
     
