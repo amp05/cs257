@@ -67,6 +67,37 @@ def get_contestants_matching():
 
     return json.dumps(matching_contestants)
 
+@api.route('/diversity/', strict_slashes=False)
+def get_diversity():
+    query = '''SELECT season_number, SUM(african_american) as african_american, 
+                SUM(asian_american) as asian_american, SUM(latin_american) as latin_american, 
+                SUM(african_american)+SUM(asian_american)+SUM(latin_american) as total_poc, 
+                COUNT(contestants) as total FROM contestants GROUP BY season_number;'''
+    input = flask.request.args.get('seasons')
+    input = input.split(',')
+    seasons = []
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        for row in cursor:
+            season = {'season_number':row[0], 'african_american':row[1], 'asian_american':row[2], 'latin_american':row[3], 'total_poc':row[4], 'total':row[5]}
+            seasons.append(season)
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    toReturn = []
+    for season in seasons:
+        if str(season['season_number']) in input:
+            toReturn.append(season)
+    if len(toReturn) < 1:
+        return ["No data found"]
+    print(toReturn)
+    return toReturn
+
+
 @api.route('/connections/')
 def find_missing_link():
     query = '''SELECT contestants.contestant_name, contestants.season_number
@@ -143,36 +174,3 @@ def find_link(graph, start, end):
                 for n2 in [n for n in graph[n1] if n in graph[n3]]:
                     return [start, n1, n2, n3, n4, end]
     return []
-
-
-
-@api.route('/graphs/') 
-def graphs():
-    query = '''SELECT contestants.age, contestants.finish
-               FROM contestants
-               ORDER BY contestants.age'''
-    source = flask.request.args.get('source')
-    target = flask.request.args.get('target')
-    contestants = []
-
-    try:
-        connection = get_connection()
-        cursor = connection.cursor()
-        cursor.execute(query)
-        for row in cursor:
-            contestant = {'contestant_age':row[0], 'contestant.placement':row[1]}
-            contestants.append(contestant)
-        cursor.close()
-        connection.close()
-    except Exception as e:
-        print(e, file=sys.stderr)
-    
-    xpoints = np.array([1, 80])
-    ypoints = np.array([1, 20])
-
-    fig = plt.figure(figsize=(8,6))
-    plt.plot(contestants['age'],contestants['placement'],'.')
-    plt.xlabel('Age')
-    plt.ylabel('Placement')
-    plt.show
-    

@@ -1,3 +1,3 @@
-user = 'jondich'
+user = 'aldopolanco'
 password = ''
-database = 'grading'
+database = 'survivor'

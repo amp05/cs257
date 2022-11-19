@@ -17,6 +17,11 @@ function initialize() {
         element.onclick = onFindLinkButton;
 
     }
+    var element = document.getElementById('diversity');
+    if (element) {
+        element.onclick = onDiversityButton;
+
+    }
 }
 
 // Returns the base URL of the API, onto which endpoint
@@ -105,4 +110,62 @@ function onFindLinkButton() {
     });
 
 }
+
+function onDiversityButton() {
+    var url = getAPIBaseURL() + '/diversity/';
+    var element1 = document.getElementById('seasons');
+    if (!element1) {
+        return;
+    }
+
+    url += '?seasons=' + element1.value;
+
+    fetch(url, {method: 'get'})
+
+    .then((response) => response.json())
+
+    .then(function(seasons) {
+        var xValues = ['African American', 'Asian American', 'Latin American', 'Total POC', 'Total'];
+        var yValues = [0,0,0,0,0]
+        for (var k = 0; k < seasons.length; k++) {
+            var season = seasons[k];
+            yValues[0] += season['african_american']
+            yValues[1] += season['asian_american']
+            yValues[2] += season['latin_american']
+            yValues[3] += season['total_poc']
+            yValues[4] += season['total']
+        }
+        if (typeof chart !== 'undefined') {
+            chart.destroy()
+        }
+        var barColors = "red";
+        chart = new Chart("graph", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }
+        });
+    })
+
+    .catch(function(error) {
+        console.log(error);
+    });
+
+}
+
 window.onload = initalize;

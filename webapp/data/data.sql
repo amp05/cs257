@@ -32,9 +32,9 @@ CREATE TABLE public.contestants (
     season_number integer,
     finish integer,
     gender text,
-    african_american bit(1),
-    asian_american bit(1),
-    latin_american bit(1)
+    african_american integer,
+    asian_american integer,
+    latin_american integer
 );
 
 

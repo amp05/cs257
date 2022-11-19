@@ -23,6 +23,10 @@ def home():
 def connections():
     return flask.render_template('connections.html')
 
+@app.route('/diversity.html') 
+def diversity():
+    return flask.render_template('diversity.html')
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A Survivor contestant application, including API & DB')
     parser.add_argument('host', help='the host to run on')
