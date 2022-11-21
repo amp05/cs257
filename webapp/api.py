@@ -11,8 +11,6 @@ import flask
 import json
 import config
 import psycopg2
-import matplotlib.pyplot as plt
-import numpy as np
 
 
 api = flask.Blueprint('api', __name__)
