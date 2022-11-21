@@ -52,8 +52,21 @@ body {
     font-weight: 800;
 }
 
+table {
+    width: 75%
+}
 
+th {
+    background-color: grey;
+}
 
+tr {
+    background-color: white;
+}
+
+ul {
+    background-color: white;
+}
 /* Horizontal navigation */
 ul.horizontal-navbar {
     list-style-type: none;

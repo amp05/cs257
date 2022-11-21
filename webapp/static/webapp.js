@@ -64,9 +64,19 @@ function loadContestantsSelector() {
                             + '</tr>\n';
         }
 
+        tablehead = '<thead>'
+                        + '<tr class = "table-headers">'
+                            + '<th> Contestant Name </th>'
+                            + '<th> Age when Featured </th>'
+                            + '<th> Hometown </th>'
+                            + '<th> Occupation </th>'
+                            + '<th> Season Number </th>'
+                        + '</tr>'
+                    + '</thead>'
+                        
         let contestantTable = document.getElementById('contestants_table');
         if (contestantTable) {
-            contestantTable.innerHTML = tableBody;
+            contestantTable.innerHTML = tablehead+ tableBody;
         }
     })
 
