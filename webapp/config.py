@@ -1,3 +1,3 @@
-user = 'aldopolanco'
+user = 'alexwidman'
 password = ''
 database = 'survivor'

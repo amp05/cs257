@@ -19,6 +19,10 @@ app.register_blueprint(api.api, url_prefix='/api')
 def home():
     return flask.render_template('index.html')
 
+@app.route('/search.html') 
+def search():
+    return flask.render_template('search.html')
+
 @app.route('/connections.html') 
 def connections():
     return flask.render_template('connections.html')

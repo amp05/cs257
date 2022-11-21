@@ -8,12 +8,20 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
-    color: #ff0011;
+    color: black
     
 }
 .header {
-    text-align: center;
+    text-align: left;
     padding: 20px;
+    background: white;
+    color: black;
+    font-size: 20px;
+}
+
+.header a {
+    text-decoration: none;
+    color: black;
 }
 
 .column1 {
@@ -53,9 +61,8 @@ ul.horizontal-navbar {
     padding: 0;
     overflow: hidden;
     background-color: #f1f1f1;
-    width: 290px;
-    
-    
+    width: 450px;
+
 }
     
 ul.horizontal-navbar li {
